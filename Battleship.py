@@ -1,12 +1,9 @@
-'''
-title: Battleship Simulator
-author: Mritunjay Mukherjee 11B
-date: 30 Jan 2025
-'''
 from random import randint
 import time
 import os
 letters = ["XX","A","B","C","D","E","F","G","H","I","J"]
+dev = 1
+lastHit = 0
 
 '''
 PLAYER INITIALIZATION
@@ -21,6 +18,11 @@ def Carrier(playerBoard,playerShips):
     print("1. Place ship from left coordinate to right coordinate")
     print("2. Place ship from bottom coordinate to top coordinate")
     orient = input("Enter choice(1-2): ")
+    if orient == "1" or orient == "2":
+        pass
+    else:
+        print("Invalid choice! Try again! ")
+        return 0
 
     start = input("Enter start coordinate (in B4 format): ")
     if start[0] in letters:
@@ -44,18 +46,26 @@ def Carrier(playerBoard,playerShips):
     try: 
         if int(orient) == 1:
             for i in range(5):
-                newPlayerBoard[num][letternum+i] = "X"
-                Carrier.append(letters[letternum+i]+str(num))
+                if newPlayerBoard[num][letternum+i] == "-":
+                    newPlayerBoard[num][letternum+i] = "X"
+                    Carrier.append(letters[letternum+i]+str(num))
+                else:
+                    print("Selected coordinate makes boat go out of map! Try again! ")
+                    return 0
         elif int(orient) == 2:
             for i in range(5):
-                newPlayerBoard[num-i][letternum] = "X"
-                Carrier.append(letters[letternum]+str(num-i))
+                if newPlayerBoard[num-i][letternum] == "-":
+                    newPlayerBoard[num-i][letternum] = "X"
+                    Carrier.append(letters[letternum]+str(num-i))
+                else:
+                    print("Selected coordinate makes boat go out of map! Try again! ")
+                    return 0
         else: 
             print("Invalid choice! Try again! ")
             return 0
         
     except ValueError:
-        print("Invalid input! Try again!")
+        print("Invalid input! Try again! ")
         return 0
     
     except IndexError:
@@ -74,6 +84,11 @@ def Battleship(playerBoard,playerShips):
     print("1. Place ship from left coordinate to right coordinate")
     print("2. Place ship from bottom coordinate to top coordinate")
     orient = input("Enter choice(1-2): ")
+    if orient == "1" or orient == "2":
+        pass
+    else:
+        print("Invalid choice! Try again! ")
+        return 0
 
     start = input("Enter start coordinate (in B4 format): ")
     if start[0] in letters:
@@ -100,8 +115,11 @@ def Battleship(playerBoard,playerShips):
                 if newPlayerBoard[num][letternum+i] == "-":
                     newPlayerBoard[num][letternum+i] = "X"
                     Battleship.append(letters[letternum+i]+str(num))
-                else:
+                elif newPlayerBoard[num][letternum+i] == "X":
                     print("Selected coordinate already has a boat! Try again! ")
+                    return 0
+                else:
+                    print("Selected coordinate makes boat go out of map! Try again! ")
                     return 0
 
         elif int(orient) == 2:
@@ -109,8 +127,11 @@ def Battleship(playerBoard,playerShips):
                 if newPlayerBoard[num-i][letternum] == "-":
                     newPlayerBoard[num-i][letternum] = "X"
                     Battleship.append(letters[letternum]+str(num-i))
-                else:
+                elif newPlayerBoard[num-i][letternum] == "X":
                     print("Selected coordinate already has a boat! Try again! ")
+                    return 0
+                else:
+                    print("Selected coordinate makes boat go out of map! Try again! ")
                     return 0
         else: 
             print("Invalid choice! Try again! ")
@@ -136,6 +157,11 @@ def Destroyer(playerBoard,playerShips):
     print("1. Place ship from left coordinate to right coordinate")
     print("2. Place ship from bottom coordinate to top coordinate")
     orient = input("Enter choice(1-2): ")
+    if orient == "1" or orient == "2":
+        pass
+    else:
+        print("Invalid choice! Try again! ")
+        return 0
 
     start = input("Enter start coordinate (in B4 format): ")
     if start[0] in letters:
@@ -162,8 +188,11 @@ def Destroyer(playerBoard,playerShips):
                 if newPlayerBoard[num][letternum+i] == "-":
                     newPlayerBoard[num][letternum+i] = "X"
                     Destroyer.append(letters[letternum+i]+str(num))
-                else:
+                elif newPlayerBoard[num][letternum+i] == "X":
                     print("Selected coordinate already has a boat! Try again! ")
+                    return 0
+                else:
+                    print("Selected coordinate makes boat go out of map! Try again! ")
                     return 0
 
         elif int(orient) == 2:
@@ -171,8 +200,11 @@ def Destroyer(playerBoard,playerShips):
                 if newPlayerBoard[num-i][letternum] == "-":
                     newPlayerBoard[num-i][letternum] = "X"
                     Destroyer.append(letters[letternum]+str(num-i))
-                else:
+                elif newPlayerBoard[num-i][letternum] == "X":
                     print("Selected coordinate already has a boat! Try again! ")
+                    return 0
+                else:
+                    print("Selected coordinate makes boat go out of map! Try again! ")
                     return 0
         else: 
             print("Invalid choice! Try again! ")
@@ -198,6 +230,11 @@ def Submarine(playerBoard,playerShips):
     print("1. Place ship from left coordinate to right coordinate")
     print("2. Place ship from bottom coordinate to top coordinate")
     orient = input("Enter choice(1-2): ")
+    if orient == "1" or orient == "2":
+        pass
+    else:
+        print("Invalid choice! Try again! ")
+        return 0
 
     start = input("Enter start coordinate (in B4 format): ")
     if start[0] in letters:
@@ -224,8 +261,11 @@ def Submarine(playerBoard,playerShips):
                 if newPlayerBoard[num][letternum+i] == "-":
                     newPlayerBoard[num][letternum+i] = "X"
                     Submarine.append(letters[letternum+i]+str(num))
-                else:
+                elif newPlayerBoard[num][letternum+i] == "X":
                     print("Selected coordinate already has a boat! Try again! ")
+                    return 0
+                else:
+                    print("Selected coordinate makes boat go out of map! Try again! ")
                     return 0
 
         elif int(orient) == 2:
@@ -233,8 +273,11 @@ def Submarine(playerBoard,playerShips):
                 if newPlayerBoard[num-i][letternum] == "-":
                     newPlayerBoard[num-i][letternum] = "X"
                     Submarine.append(letters[letternum]+str(num-i))
-                else:
+                elif newPlayerBoard[num-i][letternum] == "X":
                     print("Selected coordinate already has a boat! Try again! ")
+                    return 0
+                else:
+                    print("Selected coordinate makes boat go out of map! Try again! ")
                     return 0
         else: 
             print("Invalid choice! Try again! ")
@@ -260,6 +303,11 @@ def PatrolBoat(playerBoard,playerShips):
     print("1. Place ship from left coordinate to right coordinate")
     print("2. Place ship from bottom coordinate to top coordinate")
     orient = input("Enter choice(1-2): ")
+    if orient == "1" or orient == "2":
+        pass
+    else:
+        print("Invalid choice! Try again! ")
+        return 0 
 
     start = input("Enter start coordinate (in B4 format): ")
     if start[0] in letters:
@@ -286,8 +334,11 @@ def PatrolBoat(playerBoard,playerShips):
                 if newPlayerBoard[num][letternum+i] == "-":
                     newPlayerBoard[num][letternum+i] = "X"
                     PatrolBoat.append(letters[letternum+i]+str(num))
-                else:
+                elif newPlayerBoard[num-i][letternum] == "X":
                     print("Selected coordinate already has a boat! Try again! ")
+                    return 0
+                else:
+                    print("Selected coordinate makes boat go out of map! Try again! ")
                     return 0
 
         elif int(orient) == 2:
@@ -295,8 +346,11 @@ def PatrolBoat(playerBoard,playerShips):
                 if newPlayerBoard[num-i][letternum] == "-":
                     newPlayerBoard[num-i][letternum] = "X"
                     PatrolBoat.append(letters[letternum]+str(num-i))
-                else:
+                elif newPlayerBoard[num-i][letternum] == "X":
                     print("Selected coordinate already has a boat! Try again! ")
+                    return 0
+                else:
+                    print("Selected coordinate makes boat go out of map! Try again! ")
                     return 0
         else: 
             print("Invalid choice! Try again! ")
@@ -402,15 +456,22 @@ def playerInit(playerBoard,playerShips):
 PLAYER TURN
 '''
  
-def playerTurn(attackingPlayerAttempts,defendingShips,defender):
+def playerTurn(attackingPlayerAttempts,defendingShips):
     try:
         num = int(input("Enter row number(1-10): "))
+        if num > 10 or num < 1:
+            print("Invalid coordinate entered! Try again...")
+            return 1 
         letter = input("Enter column letter(A-J): ").upper()
-        letternum = int(letters.index(letter))
+        if letter in letters: 
+            letternum = int(letters.index(letter))
+        else:
+            print("Invalid coordinate entered! Try again...")
+            return 1
         coord = letter+str(num)
     except:
-        print("Invalid coordinate entered! Turn wasted...")
-        return
+        print("Invalid coordinate entered! Try again...")
+        return 1
 
     if coord in defendingShips["Carrier"]:
         attackingPlayerAttempts[num][letternum] = "H"
@@ -448,133 +509,13 @@ def playerTurn(attackingPlayerAttempts,defendingShips,defender):
             print("Patrol Boat has sunk! ")
     else:
         if attackingPlayerAttempts[num][letternum] == "H" or attackingPlayerAttempts[num][letternum] == "M":
-            print("Coordinate was already tried! Turn wasted...")
+            print("Coordinate was already tried! Try again...")
+            return 1
         else:
             attackingPlayerAttempts[num][letternum] = "M"
             print("A MISS!")
     
-    if attackingPlayerAttempts[num][letternum] == "H":
-        if len(defendingShips["Carrier"]) == 0 and len(defendingShips["Battleship"]) == 0 and len(defendingShips["Destroyer"]) == 0 and len(defendingShips["Submarine"]) == 0 and len(defendingShips["PatrolBoat"]) == 0:
-            if defender == "P" or defender == "C":
-                singlePlayerOver(defender)
-            else:
-                pvpOver(defender)
-    
-'''
-PVP MODE
-'''
-
-def pvpStart(player1Board,player2Board,player1Ships,player2Ships,player1Attempts, player2Attempts):
-    print("Starting Battleship Simulator.....\n")
-    time.sleep(2)
-    print("Beginning Player 1 setup...")
-    time.sleep(2)
-    params1 = playerInit(player1Board, player1Ships)
-    player1Board = params1[0]
-    player1Ships = params1[1]
-    if player1Board == 0:
-        return
-    print("We now clear screen to cover the setup:")
-    time.sleep(2)
-    os.system("cls" if os.name == "nt" else "clear")
-
-    print("Beginning Player 2 setup...")
-    time.sleep(2)
-    params2 = playerInit(player2Board, player2Ships)
-    player2Board = params2[0]
-    player2Ships = params2[1]
-    if player2Board == 0:
-        return
-    print("We now clear screen to cover the setup:")
-    time.sleep(2)
-    os.system("cls" if os.name == "nt" else "clear")
-    pvpControl(player1Board,player2Board,player1Ships,player2Ships,player1Attempts, player2Attempts)
-
-def pvpControl(player1Board,player2Board,player1Ships,player2Ships,player1Attempts, player2Attempts):
-    print("Setup finished! Loading game...")
-    time.sleep(2)
-    pointer = 1
-    while True:
-        if pointer%2 == 1:
-            while True: 
-                print("Player 1")
-                print("Choose what to do: ")
-                print("1. Show past attempts")
-                print("2. Show my placements")
-                print("3. Make a guess and end turn")
-                try:
-                    choice = int(input("Enter number (1-3): "))
-                except:
-                    print('Invalid choice! Turn wasted! ')
-                    break
-                if choice == 1: 
-                    print("The previous attempts: ")
-                    for i in player1Attempts:
-                        for j in i: 
-                            print(j,end=" ")
-                        print()
-                    print()
-                elif choice == 2: 
-                    print("The placement grid is as follows: ")
-                    for i in player1Board:
-                        for j in i: 
-                            print(j,end=" ")
-                        print()
-                    print()
-                elif choice == 3:
-                    playerTurn(player1Attempts,player2Ships,2)
-                    time.sleep(2)
-                    print("We now insert clear screen to cover the turn:")
-                    time.sleep(2)
-                    os.system("cls" if os.name == "nt" else "clear")
-                    break
-                else:
-                    print("Error! Try again ")
-        else:
-            while True: 
-                print("Player 2")
-                print("Choose what to do: ")
-                print("1. Show past attempts")
-                print("2. Show my placements")
-                print("3. Make a guess and end turn")
-                try:
-                    choice = int(input("Enter number (1-3): "))
-                except:
-                    print('Invalid choice! Turn wasted! ')
-                    break
-                if choice == 1: 
-                    print("The previous attempts: ")
-                    for i in player2Attempts:
-                        for j in i: 
-                            print(j,end=" ")
-                        print()
-                    print()
-                elif choice == 2: 
-                    print("The placement grid is as follows: ")
-                    for i in player2Board:
-                        for j in i: 
-                            print(j,end=" ")
-                        print()
-                    print()
-                elif choice == 3:
-                    playerTurn(player2Attempts,player1Ships,1)
-                    time.sleep(2)
-                    print("We now clear screen to cover the turn:")
-                    time.sleep(2)
-                    os.system("cls" if os.name == "nt" else "clear")
-                    break
-                else:
-                    print("Error! Try again ")
-        pointer += 1
-
-def pvpOver(defender):
-    print(f"All the boats of Player {defender} have sunk!")
-    if defender == 1:
-        print("Player 2 is the WINNER!!!")
-    else:
-        print("Player 1 is the WINNER!!!")
-    time.sleep(2)
-    main()
+    return 0
 
 '''
 COMPUTER INITIALIZATION
@@ -592,12 +533,18 @@ def cCarrier(computerBoard,computerShips):
     try: 
         if int(orient) == 1:
             for i in range(5):
-                newComputerBoard[num][letternum+i] = "X"
-                Carrier.append(letters[letternum+i]+str(num))
+                if newComputerBoard[num][letternum+i] == "-":
+                    newComputerBoard[num][letternum+i] = "X"
+                    Carrier.append(letters[letternum+i]+str(num))
+                else:
+                    return 0
         elif int(orient) == 2:
             for i in range(5):
-                newComputerBoard[num-i][letternum] = "X"
-                Carrier.append(letters[letternum]+str(num-i))
+                if newComputerBoard[num][letternum+i] == "-":
+                    newComputerBoard[num-i][letternum] = "X"
+                    Carrier.append(letters[letternum]+str(num-i))
+                else:
+                    return 0
         else: 
             return 0
         
@@ -757,18 +704,20 @@ def cPatrolBoat(computerBoard,computerShips):
     return [newComputerBoard,newComputerShips]
 
 def computerInit(computerBoard,computerShips):
+    global dev
     params = cCarrier(computerBoard,computerShips)
     while params == 0:
         params = cCarrier(computerBoard,computerShips)
     computerBoard = params[0]
     computerShips = params[1]
 
-    print()
-    for i in computerBoard:
-            for j in i: 
-                print(j,end=" ")
-            print()
-    print()
+    if dev == 1:
+        print()
+        for i in computerBoard:
+                for j in i: 
+                    print(j,end=" ")
+                print()
+        print()
     
     params = cBattleship(computerBoard,computerShips)
     while params == 0:
@@ -776,12 +725,13 @@ def computerInit(computerBoard,computerShips):
     computerBoard = params[0]
     computerShips = params[1]
     
-    print()
-    for i in computerBoard:
-            for j in i: 
-                print(j,end=" ")
-            print()
-    print()
+    if dev == 1:
+        print()
+        for i in computerBoard:
+                for j in i: 
+                    print(j,end=" ")
+                print()
+        print()
 
     params = cDestroyer(computerBoard,computerShips)
     while params == 0:
@@ -789,12 +739,13 @@ def computerInit(computerBoard,computerShips):
     computerBoard = params[0]
     computerShips = params[1]
     
-    print()
-    for i in computerBoard:
-            for j in i: 
-                print(j,end=" ")
-            print()
-    print()
+    if dev == 1:
+        print()
+        for i in computerBoard:
+                for j in i: 
+                    print(j,end=" ")
+                print()
+        print()
     
     params = cSubmarine(computerBoard,computerShips)
     while params == 0:
@@ -802,12 +753,13 @@ def computerInit(computerBoard,computerShips):
     computerBoard = params[0]
     computerShips = params[1]
     
-    print()
-    for i in computerBoard:
-            for j in i: 
-                print(j,end=" ")
-            print()
-    print()
+    if dev == 1:
+        print()
+        for i in computerBoard:
+                for j in i: 
+                    print(j,end=" ")
+                print()
+        print()
     
     params = cPatrolBoat(computerBoard,computerShips)
     while params == 0:
@@ -815,12 +767,13 @@ def computerInit(computerBoard,computerShips):
     computerBoard = params[0]
     computerShips = params[1]
 
-    print()
-    for i in computerBoard:
-            for j in i: 
-                print(j,end=" ")
-            print()
-    print()
+    if dev == 1:
+        print()
+        for i in computerBoard:
+                for j in i: 
+                    print(j,end=" ")
+                print()
+        print()
 
     return [computerBoard,computerShips]
 
@@ -828,146 +781,95 @@ def computerInit(computerBoard,computerShips):
 COMPUTER TURN
 '''
 
+def coordPicker(computerAttempts):
+    global lastHit
+    if lastHit == 0:
+        num = randint(1,10)
+        letternum = randint(1,10)
+        letter = letters[letternum]
+        coord = letter+str(num)
+        return [num,letternum,coord]
+    else:
+        letter = lastHit[0]
+        num = int(lastHit[1:])
+        letternum = int(letters.index(letter))
+        while True:
+            location = randint(1,4)
+            if location == 1:
+                coord = letters[letternum+1]+str(num)
+                if computerAttempts[num][letternum+1] == "-":
+                    return [num, letternum+1, coord]
+            elif location == 2:
+                coord = letters[letternum]+str(num-1)
+                if computerAttempts[num-1][letternum] == "-":
+                    return [num-1, letternum, coord]
+            elif location == 3:
+                coord = letters[letternum-1]+str(num)
+                if computerAttempts[num][letternum-1] == "-":
+                    return [num, letternum+1, coord]
+            else:
+                coord = letters[letternum]+str(num-1)
+                if computerAttempts[num-1][letternum] == "-":
+                    return [num-1, letternum, coord]
+              
 def computerTurn(computerAttempts,playerShips,defender):
-    num = randint(1,10)
-    letternum = randint(1,10)
-    letter = letters[letternum]
-    coord = letter+str(num)
+    global lastHit
+    params = coordPicker(computerAttempts)
+    num = params[0]
+    letternum = params[1]
+    coord = params[2]
 
     if coord in playerShips["Carrier"]:
         computerAttempts[num][letternum] = "H"
         print(f"{coord} WAS A HIT!")
         playerShips["Carrier"].remove(coord)
+        lastHit = coord
         if len(playerShips["Carrier"]) == 0:
             print("Carrier has sunk! ")
+            lastHit = 0
 
     elif coord in playerShips["Battleship"]:
         computerAttempts[num][letternum] = "H"
         print(f"{coord} WAS A HIT!")
         playerShips["Battleship"].remove(coord)
+        lastHit = coord
         if len(playerShips["Battleship"]) == 0:
             print("Battleship has sunk! ")
+            lastHit = 0
 
     elif coord in playerShips["Destroyer"]:
         computerAttempts[num][letternum] = "H"
         print(f"{coord} WAS A HIT!")
         playerShips["Destroyer"].remove(coord)
+        lastHit = coord
         if len(playerShips["Destroyer"]) == 0:
             print("Destroyer has sunk! ")
+            lastHit = 0
 
     elif coord in playerShips["Submarine"]:
         computerAttempts[num][letternum] = "H"
         print(f"{coord} WAS A HIT!")
         playerShips["Submarine"].remove(coord)
+        lastHit = coord
         if len(playerShips["Submarine"]) == 0:
             print("Submarine has sunk! ")
+            lastHit = 0
 
     elif coord in playerShips["PatrolBoat"]:
         computerAttempts[num][letternum] = "H"
         print(f"{coord} WAS A HIT!")
         playerShips["PatrolBoat"].remove(coord)
+        lastHit = coord 
         if len(playerShips["PatrolBoat"]) == 0:
             print("Patrol Boat has sunk! ")
+            lastHit = 0
+
     else:
         if computerAttempts[num][letternum] == "H" or computerAttempts[num][letternum] == "M":
             computerTurn(computerAttempts,playerShips,defender)
         else:
             computerAttempts[num][letternum] = "M"
             print(f"{coord} WAS A MISS!")
-    
-    if computerAttempts[num][letternum] == "H":
-        if len(playerShips["Carrier"]) == 0 and len(playerShips["Battleship"]) == 0 and len(playerShips["Destroyer"]) == 0 and len(playerShips["Submarine"]) == 0 and len(playerShips["PatrolBoat"]) == 0:
-            if defender == "P" or defender == "C":
-                singlePlayerOver(defender)
-            else:
-                pvpOver(defender)
-
-'''
-SINGLE PLAYER MODE
-'''
-
-def singlePlayerStart(playerBoard,playerAttempts,playerShips,computerBoard,computerAttempts,computerShips):
-    print("Starting Battleship Simulator.....\n")
-    time.sleep(2)
-    print("Beginning Player setup...")
-    time.sleep(2)
-    params1 = playerInit(playerBoard, playerShips)
-    playerBoard = params1[0]
-    playerShips = params1[1]
-    if playerBoard == 0:
-        return
-    print("We now clear screen to cover the setup:")
-    time.sleep(2)
-    os.system("cls" if os.name == "nt" else "clear")
-
-    print("Beginning Computer setup...")
-    time.sleep(2)
-    params2 = computerInit(computerBoard,computerShips)
-    computerBoard = params2[0]
-    computerShips = params2[1]
-    singlePlayerControl(playerBoard,playerAttempts,playerShips,computerBoard,computerAttempts,computerShips)
-
-def singlePlayerControl(playerBoard,playerAttempts,playerShips,computerBoard,computerAttempts,computerShips):
-    print("Setup finished! Loading game...")
-    time.sleep(2)
-    pointer = 1
-    while True:
-        if pointer%2 == 1:
-            while True: 
-                print("Player")
-                print("Choose what to do: ")
-                print("1. Show past attempts")
-                print("2. Show my placements")
-                print("3. Make a guess and end turn")
-                try:
-                    choice = int(input("Enter number (1-3): "))
-                except:
-                    print('Invalid choice! Turn wasted! ')
-                    break
-                if choice == 1: 
-                    print("The previous attempts: ")
-                    for i in playerAttempts:
-                        for j in i: 
-                            print(j,end=" ")
-                        print()
-                    print()
-                elif choice == 2: 
-                    print("The placement grid is as follows: ")
-                    for i in playerBoard:
-                        for j in i: 
-                            print(j,end=" ")
-                        print()
-                    print()
-                elif choice == 3:
-                    playerTurn(playerAttempts,computerShips,"C")
-                    time.sleep(2)
-                    print("We now insert clear screen to cover the turn:")
-                    time.sleep(2)
-                    os.system("cls" if os.name == "nt" else "clear")
-                    break
-                else:
-                    print("Error! Try again ")
-        else:
-            while True: 
-                print("Computer")
-                computerTurn(computerAttempts,playerShips,"P")
-                time.sleep(2)
-                print("We now clear screen to cover the turn:")
-                time.sleep(2)
-                os.system("cls" if os.name == "nt" else "clear")
-                break
-
-        pointer += 1
-
-def singlePlayerOver(defender):
-    if defender == "C":
-        print("All of Computer's Boats have sunk!!")
-        print("Player is the WINNER!!!")
-    else:
-        print("All of Player's Boats have sunk!!")
-        print("Computer is the WINNER!!!")
-    time.sleep(2)
-    main()
 
 '''
 RUNNING PROGRAM
@@ -1009,6 +911,7 @@ def main():
     VARIABLES
     '''
 
+    global dev
     player1Board = [
             ["XX","A","B","C","D","E","F","G","H","I","J"],
             ["01","-","-","-","-","-","-","-","-","-","-"],
@@ -1023,6 +926,19 @@ def main():
             ["10","-","-","-","-","-","-","-","-","-","-"]
         ]
     player2Board = [
+            ["XX","A","B","C","D","E","F","G","H","I","J"],
+            ["01","-","-","-","-","-","-","-","-","-","-"],
+            ["02","-","-","-","-","-","-","-","-","-","-"],
+            ["03","-","-","-","-","-","-","-","-","-","-"],
+            ["04","-","-","-","-","-","-","-","-","-","-"],
+            ["05","-","-","-","-","-","-","-","-","-","-"],
+            ["06","-","-","-","-","-","-","-","-","-","-"],
+            ["07","-","-","-","-","-","-","-","-","-","-"],
+            ["08","-","-","-","-","-","-","-","-","-","-"],
+            ["09","-","-","-","-","-","-","-","-","-","-"],
+            ["10","-","-","-","-","-","-","-","-","-","-"]
+        ]
+    playerBoard = [
             ["XX","A","B","C","D","E","F","G","H","I","J"],
             ["01","-","-","-","-","-","-","-","-","-","-"],
             ["02","-","-","-","-","-","-","-","-","-","-"],
@@ -1050,6 +966,7 @@ def main():
         ]
     player1Ships = {}
     player2Ships = {}
+    playerShips = {}
     computerShips = {}
     player1Attempts = [
             ["XX","A","B","C","D","E","F","G","H","I","J"],
@@ -1065,6 +982,19 @@ def main():
             ["10","-","-","-","-","-","-","-","-","-","-"]
         ]
     player2Attempts = [
+            ["XX","A","B","C","D","E","F","G","H","I","J"],
+            ["01","-","-","-","-","-","-","-","-","-","-"],
+            ["02","-","-","-","-","-","-","-","-","-","-"],
+            ["03","-","-","-","-","-","-","-","-","-","-"],
+            ["04","-","-","-","-","-","-","-","-","-","-"],
+            ["05","-","-","-","-","-","-","-","-","-","-"],
+            ["06","-","-","-","-","-","-","-","-","-","-"],
+            ["07","-","-","-","-","-","-","-","-","-","-"],
+            ["08","-","-","-","-","-","-","-","-","-","-"],
+            ["09","-","-","-","-","-","-","-","-","-","-"],
+            ["10","-","-","-","-","-","-","-","-","-","-"]
+        ]
+    playerAttempts = [
             ["XX","A","B","C","D","E","F","G","H","I","J"],
             ["01","-","-","-","-","-","-","-","-","-","-"],
             ["02","-","-","-","-","-","-","-","-","-","-"],
@@ -1097,21 +1027,265 @@ def main():
     
     print("\n\t********************************\n\tWELCOME TO BATTLESHIP SIMULATOR\n\t********************************\n")
     print("Select Mode: ")
+    print("1. Developer mode")
+    print("2. Player mode")
+
+    try:
+        dev = int(input("Enter (1-2): "))
+        if dev == 1 or dev == 2:
+            pass
+        else:
+            dev = 2
+            print("Defaulting to player mode")
+    except:
+        print("Invalid number choice! Restaring program....")
+        return
+
+    print("\nSelect Game Style: ")
     print("1. Rules")
     print("2. Start PlayerVsPlayer")
     print("3. Start Single Player Mode")
-    print("4. Quit \n")
-    mode = int(input("Enter (1-4): "))
-    if mode == 1:
-        rules()
-    elif mode == 2:
-        pvpStart(player1Board,player2Board,player1Ships,player2Ships, player1Attempts, player2Attempts)
-    elif mode == 3:
-        singlePlayerStart(player1Board,player1Attempts,player1Ships,computerBoard,computerAttempts,computerShips)
-    elif mode == 4:
-        quit()
-    else:
-        print("Invalid number choice! Restaring program....")
+    print("4. Quit")
 
-while True: 
-    main()
+    try:
+        mode = int(input("Enter (1-4): "))
+        if mode == 1:
+            rules()
+        elif mode == 2:
+            print("Starting Battleship Simulator.....\n")
+            time.sleep(2)
+            print("Beginning Player 1 setup...")
+            time.sleep(2)
+            params1 = playerInit(player1Board, player1Ships)
+            player1Board = params1[0]
+            player1Ships = params1[1]
+            if player1Board == 0:
+                return
+            print("We now clear screen to cover the setup:")
+            time.sleep(2)
+            os.system("cls" if os.name == "nt" else "clear")
+
+            print("Beginning Player 2 setup...")
+            time.sleep(2)
+            params2 = playerInit(player2Board, player2Ships)
+            player2Board = params2[0]
+            player2Ships = params2[1]
+            if player2Board == 0:
+                return
+            print("We now clear screen to cover the setup:")
+            time.sleep(2)
+            os.system("cls" if os.name == "nt" else "clear")
+            print("Setup finished! Loading game...")
+            time.sleep(2)
+
+            pointer = 1
+            while True:
+                if pointer%2 == 1:
+                    while True: 
+                        print("Player 1")
+                        print("Choose what to do: ")
+                        print("1. Show past attempts")
+                        print("2. Show my placements")
+                        print("3. Make a guess and end turn")
+                        print("4. End game")
+                        try:
+                            choice = int(input("Enter number (1-4): "))
+                            if choice > 4 or choice < 1:
+                                print('Invalid choice! Try again! ')
+                                continue
+                        except:
+                            print('Invalid choice! Try again! ')
+                            continue
+                        if choice == 1: 
+                            print("The previous attempts: ")
+                            for i in player1Attempts:
+                                for j in i: 
+                                    print(j,end=" ")
+                                print()
+                            print()
+                        elif choice == 2: 
+                            print("The placement grid is as follows: ")
+                            for i in player1Board:
+                                for j in i: 
+                                    print(j,end=" ")
+                                print()
+                            print()
+                        elif choice == 3:
+                            out = playerTurn(player1Attempts,player2Ships)
+                            while out == 1:
+                                print()
+                                out = playerTurn(player1Attempts,player2Ships)
+
+                            if len(player2Ships["Carrier"]) == 0 and len(player2Ships["Battleship"]) == 0 and len(player2Ships["Destroyer"]) == 0 and len(player2Ships["Submarine"]) == 0 and len(player2Ships["PatrolBoat"]) == 0:
+                                print(f"All the boats of Player 2 have sunk!")
+                                print("Player 1 is the WINNER!!!")
+                                return
+
+                            time.sleep(2)
+                            print("We now insert clear screen to cover the turn:")
+                            time.sleep(2)
+                            os.system("cls" if os.name == "nt" else "clear")
+                            break
+                        elif choice == 4:
+                            print("Player 2 is the WINNER by resignation")
+                            return
+                        else:
+                            print("Error! Try again ")
+
+                else:
+                    while True: 
+                        print("Player 2")
+                        print("Choose what to do: ")
+                        print("1. Show past attempts")
+                        print("2. Show my placements")
+                        print("3. Make a guess and end turn")
+                        print("4. End game")
+                        try:
+                            choice = int(input("Enter number (1-4): "))
+                            if choice > 4 or choice < 1:
+                                print('Invalid choice! Try again! ')
+                                continue
+                        except:
+                            print('Invalid choice! Try again! ')
+                            continue
+                        if choice == 1: 
+                            print("The previous attempts: ")
+                            for i in player2Attempts:
+                                for j in i: 
+                                    print(j,end=" ")
+                                print()
+                            print()
+                        elif choice == 2: 
+                            print("The placement grid is as follows: ")
+                            for i in player2Board:
+                                for j in i: 
+                                    print(j,end=" ")
+                                print()
+                            print()
+                        elif choice == 3:
+                            out = playerTurn(player2Attempts,player1Ships)
+                            while out == 1:
+                                print()
+                                out = playerTurn(player2Attempts,player1Ships)
+                            if len(player1Ships["Carrier"]) == 0 and len(player1Ships["Battleship"]) == 0 and len(player1Ships["Destroyer"]) == 0 and len(player1Ships["Submarine"]) == 0 and len(player1Ships["PatrolBoat"]) == 0:
+                                print(f"All the boats of Player 1 have sunk!")
+                                print("Player 2 is the WINNER!!!")
+                                return
+
+                            time.sleep(2)
+                            print("We now clear screen to cover the turn:")
+                            time.sleep(2)
+                            os.system("cls" if os.name == "nt" else "clear")
+                            break
+
+                        elif choice == 4:
+                            print("Player 1 is the WINNER by resignation")
+                            return
+                        else:
+                            print("Error! Try again ")
+                pointer += 1
+        elif mode == 3:
+            print("Starting Battleship Simulator.....\n")
+            time.sleep(2)
+            print("Beginning Player setup...")
+            time.sleep(2)
+            params1 = playerInit(playerBoard, playerShips)
+            playerBoard = params1[0]
+            playerShips = params1[1]
+            if playerBoard == 0:
+                return
+            print("We now clear screen to cover the setup:")
+            time.sleep(2)
+            os.system("cls" if os.name == "nt" else "clear")
+
+            print("Beginning Computer setup...")
+            time.sleep(2)
+            params2 = computerInit(computerBoard,computerShips)
+            computerBoard = params2[0]
+            computerShips = params2[1]
+            cont = input("Press any key to continue! ")
+            print("Setup finished! Loading game...")
+            time.sleep(2)
+
+            pointer = 1
+            while True:
+                if pointer%2 == 1:
+                    while True: 
+                        print("Player")
+                        print("Choose what to do: ")
+                        print("1. Show past attempts")
+                        print("2. Show my placements")
+                        print("3. Make a guess and end turn")
+                        print("4. End game")
+                        try:
+                            choice = int(input("Enter number (1-4): "))
+                            if choice > 4 or choice < 1:
+                                print('Invalid choice! Try again! ')
+                                print()
+                                continue
+                        except:
+                            print('Invalid choice! Try again! ')
+                            print()
+                            continue
+                        if choice == 1: 
+                            print("The previous attempts: ")
+                            for i in playerAttempts:
+                                for j in i: 
+                                    print(j,end=" ")
+                                print()
+                            print()
+                        elif choice == 2: 
+                            print("The placement grid is as follows: ")
+                            for i in playerBoard:
+                                for j in i: 
+                                    print(j,end=" ")
+                                print()
+                            print()
+                        elif choice == 3:
+                            out = playerTurn(playerAttempts,computerShips)
+                            while out == 1:
+                                print()
+                                out = playerTurn(playerAttempts,computerShips)
+                            if len(computerShips["Carrier"]) == 0 and len(computerShips["Battleship"]) == 0 and len(computerShips["Destroyer"]) == 0 and len(computerShips["Submarine"]) == 0 and len(computerShips["PatrolBoat"]) == 0:
+                                print(f"All the boats of Computer have sunk!")
+                                print("Player is the WINNER!!!")
+                                return
+                            
+                            time.sleep(2)
+                            print("We now insert clear screen to cover the turn:")
+                            time.sleep(2)
+                            os.system("cls" if os.name == "nt" else "clear")
+                            break
+                        elif choice == 4:
+                            print("Computer is the WINNER by resignation")
+                            return
+                        else:
+                            print("Error! Try again ")
+                else:
+                    while True: 
+                        print("Computer")
+                        computerTurn(computerAttempts,playerShips)
+                        if len(playerShips["Carrier"]) == 0 and len(playerShips["Battleship"]) == 0 and len(playerShips["Destroyer"]) == 0 and len(playerShips["Submarine"]) == 0 and len(playerShips["PatrolBoat"]) == 0:
+                                print(f"All the boats of Player have sunk!")
+                                print("Computer is the WINNER!!!")
+                                return
+                        cont = input("Press any key to continue: ")
+                        print("We now clear screen to cover the turn:")
+                        time.sleep(2)
+                        os.system("cls" if os.name == "nt" else "clear")
+                        break
+                pointer += 1
+        elif mode == 4:
+            return 404
+        else:
+            print("Invalid number choice! Restaring program....")
+            return    
+    except:
+        print("Invalid number choice! Restaring program....")
+        return
+
+if __name__ == "__main__":
+    while True: 
+        code = main()
+        if code == 404:
+            break
